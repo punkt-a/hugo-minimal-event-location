@@ -1,0 +1,13 @@
+details {
+    margin: 0.5rem auto;
+    margin-left: 1.2rem;
+}
+div.faq-answer {
+    margin-top: 0.3rem;
+    margin-left: 0.1rem;
+}
+summary {
+    font-size: 14pt;
+    cursor: pointer;
+    list-style-position: outside;
+}

@@ -1,0 +1,5 @@
+{{- $pagetitle := .Title -}}
+{{- $pagetitle = replace $pagetitle "$$Event" (printf "%s" .Site.Params.Event) -}}
+{{- $pagetitle = replace $pagetitle "$$Location" (printf "%s" .Site.Params.Location) -}}
+{{- $pagetitle = replace $pagetitle "$$Categories" (print (i18n "categories")) -}}
+{{- $pagetitle -}}

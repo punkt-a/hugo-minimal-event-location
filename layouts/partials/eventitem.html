@@ -1,0 +1,8 @@
+<div class="events-item">
+    <h4><a href="{{ .RelPermalink }}">{{ .Title }}</a></h4>
+    {{ time.Format "Monday, 02.01." .Date }}<br>
+    {{ .Params.Starttime }}
+    {{- if ne .Params.Endtime "" }}-{{ .Params.Endtime }}{{ end }}<br>
+    {{ $location := .Site.GetPage (printf "%slocations/%s" (.Site.BaseURL | relLangURL) .Params.Location) }}
+    <a href="{{ $location.RelPermalink }}">{{ $location.Title }}</a>
+</div>

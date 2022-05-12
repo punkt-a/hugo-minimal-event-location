@@ -1,0 +1,12 @@
+<div id="header">
+    <div id="top-bar">
+        {{- partial "logo.html" . -}}
+        <div class="menu desktop-only">
+        {{- partial "menu.html" . -}}
+        </div>
+        {{ partial "languageswitcher.html" . }}
+    </div>
+    <div class="menu mobile-only">
+    {{- partial "menu.html" . -}}
+    </div>
+</div>

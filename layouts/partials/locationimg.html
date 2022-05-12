@@ -1,0 +1,7 @@
+{{- $imgpath := printf "%simages/photo_001.jpg" (.RelPermalink | replaceRE "^/[a-z][a-z]/" "/") -}}
+{{ $imgpath }}
+{{ .RelPermalink }}
+{{- if not (fileExists $imgpath) -}}
+{{- $imgpath = "/images/no-photo.jpg" -}}
+{{- end -}}
+<img src="{{ $imgpath }}" alt="{{ i18n "photo_of_location" }} {{ .Title }}" class="locations-thumbnail">

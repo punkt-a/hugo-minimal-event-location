@@ -1,0 +1,35 @@
+title: Eventsite
+
+params:
+  location: Location
+  event: Event
+  logo:
+    path: /images/logo.svg
+    line1: Line 1
+    line2: Line 2
+
+menu:
+  main:
+    - name: Events
+      url: events/
+      weight: 1
+    - name: Locations
+      url: locations/
+      weight: 2
+    - name: About
+      url: about/
+      weight: 3
+    - name: FAQ
+      url: faq/
+      weight: 4
+
+mediaTypes:
+  application/geo+json:
+    suffixes:
+      - geojson
+
+outputFormats:
+  GEOJSON:
+    baseName: index
+    isPlainText: yes
+    mediaType: application/geo+json

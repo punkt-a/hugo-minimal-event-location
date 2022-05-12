@@ -1,0 +1,14 @@
+name = "Minimal Event Location"
+license = "CC0"
+licenselink = "https://github.com/punkt-a/hugo-minimal-event-location/blob/main/LICENSE"
+description = "A quite minimal, responsive theme to manage events and locations."
+homepage = "https://github.com/punkt-a/hugo-minimal-event-location"
+demosite = "https://punkt-a.net"
+
+tags = []
+features = []
+min_version = "0.41.0"
+
+[author]
+  name = "Punkt A"
+  homepage = "https://github.com/punkt-a"

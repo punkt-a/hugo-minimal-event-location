@@ -1,0 +1,23 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>{{ .Site.Title }} {{ .Site.Params.Event }}s</title>
+        <link>{{ .Permalink }}</link>
+        <description>Feed of all {{ .Site.Title }} {{ .Site.Params.Event }}s</description>
+        <generator>Hugo -- gohugo.io</generator>
+        {{ with .Site.LanguageCode }}<language>{{ . }}</language>{{ end }}
+        {{ if not .Date.IsZero }}<lastBuildDate>{{ .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</lastBuildDate>{{ end }}
+        {{ with .OutputFormats.Get "RSS" -}}
+            {{ printf "<atom:link href=%q rel=\"self\" type=%q />" .Permalink .MediaType | safeHTML }}
+        {{ end -}}
+        {{ range .Pages.ByDate.Reverse }}
+        <item>
+            <title>{{ .Title }}</title>
+            <link>{{ .Permalink }}</link>
+            <pubDate>{{ .PublishDate.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
+            <guid>{{ .Permalink }}</guid>
+            <description>{{ .Title }} {{ i18n "on_str" }} {{ time.Format "Monday, 02.01.2006" .Date }}, {{ .Params.Starttime }}{{ if .Params.Endtime }}-{{ .Params.Endtime }}{{ end }} {{ i18n "oclock" }}</description>
+            <content type="html">{{ printf `<![CDATA[%s]]>` .Content | safeHTML }}</content>
+        </item>
+        {{ end }}
+    </channel>
+</rss>

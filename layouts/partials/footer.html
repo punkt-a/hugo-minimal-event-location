@@ -1,0 +1,7 @@
+<div id="footer">
+    <a href="{{ .Site.Params.Footer.Url }}">
+        {{ range .Site.Params.Footer.Logos }}
+        <img src="{{ .path }}" alt="{{ .alt }}"/>
+        {{ end }}
+    </a>
+</div>

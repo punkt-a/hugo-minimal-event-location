@@ -1,0 +1,20 @@
+<div id="language-switcher">
+    <a href="
+    {{- range $index, $translation := .AllTranslations -}}
+        {{- if ne $translation.Site.Language $.Site.Language -}}
+            {{- $translation.RelPermalink -}}
+        {{- end -}}
+    {{- end -}}
+    ">
+        {{- range $index, $translation := .AllTranslations -}}
+            {{- if eq $translation.Site.Language $.Site.Language -}}
+                <span class="active">{{- $translation.Site.Language -}}</span>
+            {{- else -}}
+                {{- $translation.Site.Language -}}
+            {{- end -}}
+            {{- if ne (add $index 1) (len .AllTranslations) }}
+            ⇄
+            {{ end -}}
+        {{- end -}}
+    </a>
+</div>

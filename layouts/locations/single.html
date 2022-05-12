@@ -1,0 +1,37 @@
+{{ define "main" }}
+
+<h1 id="location-title">{{ .Title }} ({{ .Params.District }})</h1>
+<div id=location-address>
+    <!--<a href="http://www.openstreetmap.org/?mlat={{ .Params.Latitude }}&mlon={{ .Params.Longitude }}&zoom=12" class="location" target="_blank" rel="noopener">{{ .Params.Street }}, {{ .Params.Zipcode }} {{ .Params.City }}</a>-->
+    <a href="{{ replace .Site.Params.Umap "$$Feature" (printf "%s (%s)" .Title .Params.District) | safeURL }}" class="location" target="_blank" rel="noopener">{{ .Params.Street }}, {{ .Params.Zipcode }} {{ .Params.City }}</a>
+</div>
+<div id=location-description>
+{{ .Content }}
+</div>
+{{ $folder := printf "content%simages" (.RelPermalink | replaceRE "^/[a-z][a-z]/" "/") }}
+{{ if fileExists $folder }}
+<div id="location-images">
+    {{ $images := readDir $folder}}
+    {{ range $index, $image := $images }} 
+    {{ $imageurl := printf "%simages/%s" $.RelPermalink $image.Name | replaceRE "^/[a-z][a-z]/" "/" }}
+    <a href="{{ $imageurl }}" class="location-image
+    {{- if and (not (modBool (len $images) 2)) (eq $index (sub (len $images) 1)) }}
+    last-image-center
+    {{- end -}}
+    ">
+        <img src="{{ $imageurl }}" alt="{{ i18n "photo_of" }} {{ $.Site.Params.Location }} {{ $.Title }}"/>
+    </a>
+    {{ end }}
+</div>
+{{ else }}
+<p>{{ i18n "no_photo" }}!</p>
+{{ $folder }}
+{{ end }}
+<div class="tags">
+    {{ range .Params.Locationtags }}
+    <a href="/locationtags/{{ . | safeURL }}">#{{ . }}</a>
+    {{ end }}
+</div>
+{{ partial "paginationsingle" . }}
+
+{{ end }}

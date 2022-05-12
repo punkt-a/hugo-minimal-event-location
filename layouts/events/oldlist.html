@@ -1,0 +1,55 @@
+{{ define "main" }}
+
+{{ $pastevents := slice }}
+{{ $todayevents := slice }}
+{{ $futureevents := slice }}
+{{ range .Pages.ByDate }}
+    {{ if gt (sub now.Unix .Date.Unix) 86400 }}
+        {{ $pastevents = $pastevents | append . }}
+    {{ else if gt (sub now.Unix .Date.Unix) 0 }}
+        {{ $todayevents = $todayevents | append . }}
+    {{ else }}
+        {{ $futureevents = $futureevents | append . }}
+    {{ end }}
+{{ end }}
+
+<h1>{{ partial "title" . }}</h1>
+<div id="events-container">
+    <h2>{{ i18n "today" }}</h2>
+    <div class="events-container today">
+        {{ if eq (len $todayevents) 0 }}
+        {{ i18n "no_entries" }}
+        {{ end }}
+        {{ range $todayevents }} 
+        <div class="events-item">
+            <h4><a href="{{ .RelPermalink }}">{{ .Title }}</a></h4>
+            {{ .Params.Starttime }}
+            {{- if ne .Params.Endtime "" }}-{{ .Params.Endtime }}{{ end }}<br>
+            {{ $location := .Site.GetPage (printf "%slocations/%s" (.Site.BaseURL | relLangURL) .Params.Location) }}
+            <a href="{{ $location.RelPermalink }}">{{ $location.Title }}</a><br>
+        </div>
+        {{ end }}   
+    </div>
+    <h2>{{ i18n "upcoming" }}</h2>
+    <div class="events-container future">
+        {{ if eq (len $futureevents) 0 }}
+        {{ i18n "no_entries" }}
+        {{ end }}
+        {{ range $futureevents }} 
+        {{ partial "eventitem" . }}
+        {{ end }}   
+    </div>
+    <hr>
+    <h2>{{ i18n "past" }}</h2>
+    <div class="events-container past">
+        {{ if eq (len $pastevents) 0 }}
+        {{ i18n "no_entries" }}
+        {{ end }}
+        {{ range first 9 $pastevents.Reverse }} 
+        {{ partial "eventitem" . }}
+        {{ end }}
+    </div>
+    <a class="archive-link" href="/categories/event">{{ i18n "show_archive" }}</a>
+</div>
+
+{{ end }}

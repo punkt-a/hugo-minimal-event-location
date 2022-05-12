@@ -1,0 +1,22 @@
+{{- $stopindex := sub (len .Pages) 1 -}}
+{
+    "type": "FeatureCollection",
+    "features": [
+    {{- range $index, $item := .Pages }}
+        {
+            "type": "Feature",
+            "properties": {
+                "name": {{ (printf "%s (%s)" $item.Title $item.Params.District) | jsonify }},
+                "description": {{ (printf "%s\n%s %s" $item.Params.Street $item.Params.Zipcode $item.Params.City) | jsonify }}
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    {{ .Params.Longitude }},
+                    {{ .Params.Latitude }}
+                ]
+            }
+        }{{ if ne $index $stopindex }},{{ end }}
+    {{- end }}
+    ]
+}

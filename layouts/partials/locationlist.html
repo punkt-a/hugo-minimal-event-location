@@ -1,0 +1,13 @@
+<div class="locations-container">
+    {{ range .Paginator.Pages.ByTitle }} 
+    <a href="{{ .RelPermalink }}">
+        <figure class="locations-item">
+            {{ partial "locationimg" . }}
+            <figcaption>
+                    <h4 class="locations-district">{{ .Params.District }}</h4>
+                    <h3 class="locations-name">{{ .Title }}</h3>
+            </figcaption>
+        </figure>
+        {{ end }}   
+    </a>
+</div>

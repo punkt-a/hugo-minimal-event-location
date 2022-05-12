@@ -1,0 +1,15 @@
+{{ define "main" }}
+
+<h1>{{ i18n "category" }}: {{ partial "title" . }}</h1>
+<div id="events-container">
+    {{ range .Pages.GroupByDate "2006" }} 
+    <h2>{{ .Key }}</h2>
+    <div class="events-container">
+        {{ range .Pages.ByDate.Reverse }}
+        {{ partial "eventitem" . }}
+        {{ end }}   
+    </div>
+    {{ end }}   
+</div>
+
+{{ end }}

@@ -1,0 +1,13 @@
+{{ if eq .Language .Sites.First.Language }}
+<a href="/" id="logo-link">
+{{ else }}
+<a href="/{{ .Language }}" id="logo-link">
+{{ end }}
+    <div id="logo">
+        <img src="{{ .Site.Params.Logo.Path }}" alt="{{ .Site.Title }} Logo"/>
+        <p>
+            {{ .Site.Params.Logo.Line1 }}<br>
+            {{ .Site.Params.Logo.Line2 }}
+        </p>
+    </div>
+</a>

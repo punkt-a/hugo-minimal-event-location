@@ -1,0 +1,10 @@
+{{ define "main" }}
+<h1>{{ partial "title" . }}</h1>
+{{ partial "locationlist" . }}
+<div class="tags">
+    {{ range $count, $value := .Site.Taxonomies.locationtags.ByCount }}
+    <a href="/locationtags/{{ $value.Name | safeURL }}">#{{ $value.Name }}</a>
+    {{ end }}
+</div>
+{{ partial "paginationlist" . }}
+{{ end }}

@@ -1,0 +1,50 @@
+div#top-bar {
+    padding: 2rem 2rem 0 2rem;
+    margin: 0 auto;
+    max-width: 732px;
+    display: flex;
+    align-items: center;
+}
+
+div#logo {
+    display: flex;
+    align-items: center;
+    margin-right: 3rem;
+}
+
+#logo img {
+    max-width: 3rem;
+    max-height: 3.5rem;
+    margin-right: 0.8rem;
+}
+a#logo-link:hover {
+    text-decoration: none;
+}
+
+
+.nav-link {
+    margin: 0 0.5rem;
+    font-size: 14pt;
+    font-weight: 600;
+}
+@media (min-width: 732px) {
+    div#header {
+        margin-bottom: 4rem;
+    } 
+}
+@media (max-width: 731px) {
+    div.menu {
+        margin-top: 1.5rem;
+        text-align: center;
+    }
+    div#header {
+        margin-bottom: 3rem;
+    } 
+}
+
+#language-switcher .active {
+    font-weight: 700;
+}
+div#language-switcher {
+    margin-left: auto;
+}

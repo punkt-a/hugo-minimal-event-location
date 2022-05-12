@@ -1,0 +1,32 @@
+today:
+  other: Today
+upcoming:
+  other: Upcoming
+past:
+  other: Past
+nextup:
+  other: Next
+photo_of:
+  other: Photo of
+no_photo:
+  other: No photos available yet
+error:
+  other: Error
+fourzerofour:
+  other: Page not found
+no_entries:
+  other: No entries yet
+show_archive:
+  other: Show archive
+all:
+  other: All
+date:
+  other: Date
+time:
+  other: Time
+on_str:
+  other: "on"
+categories:
+  other: Categories
+category:
+  other: Category

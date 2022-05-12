@@ -1,0 +1,16 @@
+{{ define "main" }}
+
+<h1>{{ .Title }}</h1>
+<p id=event-meta>
+    {{ $location := .Site.GetPage (printf "/locations/%s" .Params.Location)  }}
+    <b>{{ .Site.Params.Location }}:</b> <a href="{{ $location.RelPermalink }}">{{ $location.Title }}</a><br>
+    <b>{{ i18n "date" }}:</b> {{ time.Format "Monday, 02.01.2006" .Date }}<br>
+    <b>{{ i18n "time" }}:</b> {{ .Params.Starttime }}
+    {{- if ne .Params.Endtime "" }}-{{ .Params.Endtime }}{{ end }}
+</p>
+<p id=event-description>
+{{ .Content }}
+</p>
+{{ partial "paginationsingle" . }}
+
+{{ end }}

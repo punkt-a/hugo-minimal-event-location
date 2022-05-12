@@ -1,0 +1,57 @@
+{{ define "main" }}
+
+{{ $pastevents := slice }}
+{{ $todayevents := slice }}
+{{ $futureevents := slice }}
+{{ range .Pages.ByDate }}
+    {{ if gt (sub now.Unix .Date.Unix) 86400 }}
+        {{ $pastevents = $pastevents | append . }}
+    {{ else if gt (sub now.Unix .Date.Unix) 0 }}
+        {{ $todayevents = $todayevents | append . }}
+    {{ else }}
+        {{ $futureevents = $futureevents | append . }}
+    {{ end }}
+{{ end }}
+{{ $allevents := slice $todayevents $futureevents $pastevents }}
+
+<h1>{{ partial "title" . }}</h1>
+<div id="events-container">
+    {{ range $index, $events := $allevents }}
+        {{ $key := "upcoming" }}
+        {{ $dateformat := "Monday, 02.01." }}
+        {{ if eq $index 0 }}
+            {{ $key = "today" }}
+        {{ else if eq $index 2 }}
+            {{ $key = "past" }}
+        {{ $events = first 8 $pastevents.Reverse }} 
+        <hr>
+        {{ end }}
+        <h2>{{ i18n $key }}</h2>
+        <div class="locations-container {{ $key }}">
+            {{ if eq (len $events) 0 }}
+                {{ i18n "no_entries" }}
+            {{ end }}
+            {{ range $events }} 
+                {{ $date := time.Format $dateformat .Date }}
+                {{ $time := .Params.Starttime }}
+                {{ if .Params.Endtime }}
+                    {{ $time = printf "%s-%s" $time .Params.Endtime }}
+                {{ end }}
+                <figure class="locations-item">
+                    {{ $location := .Site.GetPage (printf "/locations/%s" .Params.Location) }}
+                    {{ partial "locationimg" $location }}
+                    <figcaption>
+                        <a href="{{ .RelPermalink }}">
+                            <h4 class="locations-district">{{ $location.Title }}</h4>
+                            <h4 class="locations-district">{{ $date }}, {{ $time }}</h4>
+                            <h3 class="locations-name">{{ .Title }}</h3>
+                        </a>
+                    </figcaption>
+                </figure>
+            {{ end }}   
+        </div>
+    {{ end }}
+    <a class="archive-link" href="/categories/event">{{ i18n "show_archive" }}</a>
+</div>
+
+{{ end }}

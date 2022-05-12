@@ -1,0 +1,5 @@
+{{ define "main" }}
+<h1>{{ .Site.Params.Location }} Tag: #{{ partial "title" . }}</h1>
+{{ partial "locationlist" . }}
+{{ partial "paginationlist" . }}
+{{ end }}

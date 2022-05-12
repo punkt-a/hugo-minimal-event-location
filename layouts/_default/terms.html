@@ -1,0 +1,8 @@
+{{ define "main" }}
+<h1>{{ partial "title" . }}</h1>
+{{ range .Data.Pages }}
+<ul>
+    <li><a href="{{ .URL }}">{{ partial "title" . }}</a></li>
+</ul>
+{{ end }}
+{{ end }}

@@ -1,0 +1,25 @@
+<div id="next-training">
+    {{ $nextups := slice }}
+    {{ range (where .Site.RegularPages.ByDate "Type" "events") }}
+        {{ $start := replace (printf "%s" .Date) "00:00:00" (printf "%s:00" .Params.Starttime) | time }}
+        {{ $nowdiv := sub now.Unix $start.Unix }}
+        {{ if gt 1 $nowdiv }}
+            {{ $nextups = $nextups | append . }}
+        {{ end }}
+    {{ end }}
+    {{ if gt (len $nextups) 0 }}
+    <div id="nextup">
+        <h3>{{ i18n "nextup" }} {{ $.Site.Params.Event }}s</h3>
+        <p>
+            {{ range $nextups }}
+            {{ if gt (sub now.Unix .Date.Unix) 1 }}
+            <a href="{{ .RelPermalink }}" class="today">{{ i18n "today" }}, {{ .Params.Starttime }} – {{ .Title }}</a>
+            {{ else }}
+            <a href="{{ .RelPermalink }}">{{ time.Format "Monday, 02.01." .Date }}, {{ .Params.Starttime }} – {{ .Title }}</a>
+            {{ end }}
+            <br>
+            {{ end }}
+        </p>
+        {{ end }}
+    </div>
+</div>

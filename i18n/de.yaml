@@ -1,0 +1,34 @@
+today:
+  other: Heute
+upcoming:
+  other: Demnächst
+past:
+  other: Vergangenheit
+nextup:
+  other: Nächste
+photo_of:
+  other: Foto von
+no_photo:
+  other: Noch keine Fotos vorhanden
+error:
+  other: Fehler
+fourzerofour:
+  other: Seite nicht gefunden
+no_entries:
+  other: Noch keine Einträge
+show_archive:
+  other: Archiv anzeigen
+all:
+  other: Alle
+date:
+  other: Datum
+time:
+  other: Uhrzeit
+on_str:
+  other: am
+oclock:
+  other: Uhr
+categories:
+  other: Kategorien
+category:
+  other: Kategorie

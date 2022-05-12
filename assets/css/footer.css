@@ -1,0 +1,15 @@
+div#footer {
+    margin-top: auto;
+    padding-top: 5rem;
+    padding-bottom: 2rem;
+}
+
+#footer img {
+    max-height: 1.5rem;
+}
+#footer a {
+    text-decoration: none;
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+}
