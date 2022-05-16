@@ -1,12 +1,12 @@
 <div class="pagination">
     {{ if .PrevInSection }}
-    <a class="page-prev" href="{{ .PrevInSection.URL }}">< {{ .PrevInSection.Title }}</a>
+    <a class="page-prev" href="{{ .PrevInSection.RelPermalink }}">< {{ .PrevInSection.Title }}</a>
     {{ else }}
     <a class="page-prev"></a>
     {{ end }}
     <div class="page-numbers"></div>
     {{ if .NextInSection }}
-    <a class="page-next" href="{{ .NextInSection.URL }}">{{ .NextInSection.Title }} ></a>
+    <a class="page-next" href="{{ .NextInSection.RelPermalink }}">{{ .NextInSection.Title }} ></a>
     {{ else }}
     <a class="page-next"></a>
     {{ end }}
