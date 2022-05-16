@@ -1,8 +1,7 @@
 BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//{{ .Site.Title }}//NONSGML {{ .Site.Params.Event }} Calendar//EN
-{{- range .Pages.ByPublishDate.Reverse -}}
-{{- if lt (sub now.Unix .Date.Unix) 86400 }}
+{{- range .Pages.ByPublishDate.Reverse }}
 BEGIN:VEVENT
 UID:{{ replaceRE "([a-f0-9]{8})([a-f0-9]{8})([a-f0-9]{4})([a-f0-9]{8})([a-f0-9]{4})" "$1-$2-$3-$4-${5}0000" .File.UniqueID }}
 SUMMARY:{{ .Title }}
@@ -23,6 +22,5 @@ DTEND:{{ time.Format "20060102T150405" $end.UTC }}
 DURATION:PT2H
 {{- end }}
 END:VEVENT
-{{- end -}}
 {{- end }}
 END:VCALENDAR
