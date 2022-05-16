@@ -27,9 +27,16 @@ mediaTypes:
   application/geo+json:
     suffixes:
       - geojson
+  text/calendar:
+    suffixes:
+      - ics
 
 outputFormats:
   GEOJSON:
     baseName: index
     isPlainText: yes
     mediaType: application/geo+json
+  ICS:
+    baseName: index
+    isPlainText: yes
+    mediaType: text/calendar

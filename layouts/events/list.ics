@@ -1,0 +1,28 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//{{ .Site.Title }}//NONSGML {{ .Site.Params.Event }} Calendar//EN
+{{- range .Pages.ByPublishDate.Reverse -}}
+{{- if lt (sub now.Unix .Date.Unix) 86400 }}
+BEGIN:VEVENT
+UID:{{ replaceRE "([a-f0-9]{8})([a-f0-9]{8})([a-f0-9]{4})([a-f0-9]{8})([a-f0-9]{4})" "$1-$2-$3-$4-${5}0000" .File.UniqueID }}
+SUMMARY:{{ .Title }}
+{{- $location := .Site.GetPage (printf "/locations/%s" .Params.Location) }}
+LOCATION:{{ printf "%s (%s)" $location.Title $location.Params.District }}
+DESCRIPTION:{{ i18n "full_address" }}:\n
+ {{ $location.Params.Street }}\n
+ {{ $location.Params.Zipcode}} {{ $location.Params.City}}\n
+ {{ i18n "coordinates" }}: {{ $location.Params.Latitude }}, {{ $location.Params.Longitude }}\n
+ {{ .Permalink }}
+DTSTAMP:{{ time.Format "20060102T150405" .PublishDate.UTC }}
+{{- $start := replace (printf "%s" .Date) "00:00:00" (printf "%s:00" .Params.Starttime) | time }}
+DTSTART:{{ time.Format "20060102T150405" $start.UTC }}
+{{- if isset .Params "endtime" -}}
+{{- $end := replace (printf "%s" .Date) "00:00:00" (printf "%s:00" .Params.Endtime) | time }}
+DTEND:{{ time.Format "20060102T150405" $end.UTC }}
+{{- else }}
+DURATION:PT2H
+{{- end }}
+END:VEVENT
+{{- end -}}
+{{- end }}
+END:VCALENDAR

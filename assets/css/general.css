@@ -83,3 +83,14 @@ div.tags {
     justify-content: center;
     flex-wrap: wrap;
 }
+div#special-title {
+    display: flex;
+    margin-bottom: 1rem;
+    align-items: center;
+}
+div#special-title h1 {
+    margin: 0;
+}
+a#special-title-link {
+    margin-left: auto;
+}

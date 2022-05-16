@@ -32,6 +32,8 @@ categories:
   other: Kategorien
 category:
   other: Kategorie
+show_calendar:
+  other: Alle als Kalender
 show_map:
   other: Alle auf Karte anzeigen
 show_on_map:
@@ -40,3 +42,5 @@ show_in_maps_app:
   other: In Karten-App anzeigen
 full_address:
   other: Adresse
+coordinates:
+  other: Koordinaten

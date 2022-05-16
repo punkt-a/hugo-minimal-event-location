@@ -14,7 +14,10 @@
 {{ end }}
 {{ $allevents := slice $todayevents $futureevents $pastevents }}
 
+<div id="special-title">
 <h1>{{ partial "title" . }}</h1>
+<a id="special-title-link" href="{{ .Permalink }}index.ics">{{ i18n "show_calendar" }}</a>
+</div>
 <div id="photo-grids-container">
     {{ range $index, $events := $allevents }}
         {{ $key := "upcoming" }}

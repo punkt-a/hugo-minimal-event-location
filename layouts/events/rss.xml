@@ -24,7 +24,7 @@
             <location:latitude>{{ $location.Params.Latitude }}</location:latitude>
             <location:longtitude>{{ $location.Params.Longitude }}</location:longtitude>
             {{- if isset .Site.Params "umap" }}
-            <location:umap>{{ printf "%s?feature=%s (%s)" .Site.Params.Umap .Title $location.Params.District | safeURL }}</location:umap>
+            <location:umap>{{ printf "%s?feature=%s (%s)" .Site.Params.Umap $location.Title $location.Params.District | safeURL }}</location:umap>
             {{- end }}
             {{- $address := printf "%s, %s %s" $location.Params.Street $location.Params.Zipcode $location.Params.City}}
             <location:address>{{ $address }}</location:address>
