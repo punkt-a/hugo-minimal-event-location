@@ -19,7 +19,6 @@
             <guid>{{ .Permalink }}</guid>
             {{- $address := printf "%s, %s %s" .Params.Street .Params.Zipcode .Params.City}}
             <description>{{ printf "%s (%s), %s" .Title .Params.District $address }}</description>
-            <content type="html">{{ printf `<![CDATA[%s]]>` .Content | safeHTML }}</content>
             <location:district>{{ .Params.District }}</location:district>
             <location:address>{{ $address }}</location:address>
             <location:latitude>{{ .Params.Latitude }}</location:latitude>
