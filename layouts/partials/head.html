@@ -7,7 +7,23 @@
     {{- range .AlternativeOutputFormats }}
     {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
     {{- end }}
-    {{- $title := print (partial "title" .) " | " .Site.Title -}}
-    {{- if .IsHome -}}{{- $title = .Site.Title -}}{{- end -}}
+    {{- $title := partial "title" . -}}
+    {{- if not .IsHome -}}
+    {{- $title = printf "%s | %s" $title .Site.Title -}}
+    {{- end -}}
     <title>{{ $title }}</title>
+    <meta property="og:url" content="{{ .Site.BaseURL }}">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{ (partial "title" .) }}">
+    <meta property="og:description" content="{{ partial "summary" . }}">
+    {{- $ogimage := "/images/og-preview.jpg" -}}
+    {{- if and (eq .Type "locations") (eq .Kind "page") -}}
+    {{- $ogimage = printf "%simages/photo_001.jpg" (.RelPermalink | replaceRE "^/[a-z][a-z]/" "/") -}}
+    {{- else if and (eq .Type "events") (eq .Kind "page") -}}
+    {{- $location := .Site.GetPage (printf "/locations/%s" .Params.Location) -}}
+    {{- $ogimage = printf "%simages/photo_001.jpg" ($location.RelPermalink | replaceRE "^/[a-z][a-z]/" "/") -}}
+    {{- end -}}
+    {{- if or (fileExists $ogimage) (fileExists (printf "static%s" $ogimage)) }}
+    <meta property="og:image" content="{{ $ogimage }}">
+    {{ end -}}
 </head>

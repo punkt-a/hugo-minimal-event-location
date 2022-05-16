@@ -1,0 +1,14 @@
+{{- $summary := .Site.Params.DefaultSummary -}}
+{{- if isset .Params "summary" -}}
+{{- $summary = .Params.Summary -}}
+{{- end -}}
+{{- if and (eq .Type "locations") (eq .Kind "page") -}}
+{{- $summary = printf "%s, %s | #%s" .Params.District .Params.Street (delimit .Params.Locationtags ", ") -}}
+{{- else if and (eq .Type "events") (eq .Kind "page") -}}
+{{- $location := .Site.GetPage (printf "/locations/%s" .Params.Location) -}}
+{{- $summary = printf "%s (%s), %s, %s" $location.Title $location.Params.District (time.Format ":date_full" .Params.Date) .Params.Starttime -}}
+{{- if isset .Params "endtime" -}}
+{{- $summary = printf "%s-%s" $summary .Params.Endtime -}}
+{{- end -}}
+{{- end -}}
+{{- $summary -}}
