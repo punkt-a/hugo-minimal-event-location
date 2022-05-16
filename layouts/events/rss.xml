@@ -8,7 +8,7 @@
         <description>Feed of all upcoming {{ .Site.Title }} {{ .Site.Params.Event }}s</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>{{ .Site.LanguageCode }}</language>
-        <lastBuildDate>{{ time.Format "Mon, 02 Jan 2006 15:04:05 -0700" now | safeHTML }}</lastBuildDate>
+        <lastBuildDate>{{ now.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</lastBuildDate>
         {{- with .OutputFormats.Get "RSS" }}
         {{ printf "<atom:link href=%q rel=\"self\" type=%q />" .Permalink .MediaType | safeHTML }}
         {{- end -}}
