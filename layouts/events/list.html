@@ -23,7 +23,9 @@
             {{ $key = "today" }}
         {{ else if eq $index 2 }}
             {{ $key = "past" }}
-            {{ $events = first 8 $pastevents.Reverse }} 
+            {{ if gt (len $events) 0 }}
+                {{ $events = first 8 $events.Reverse }} 
+            {{ end }}
         <hr>
         {{ end }}
         <h2>{{ i18n $key }}</h2>
