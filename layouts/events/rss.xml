@@ -1,4 +1,7 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0"
+    xmlns:atom="http://www.w3.org/2005/Atom"
+    xmlns:location="{{ .Site.BaseURL }}"
+    xmlns:event="{{ .Site.BaseURL }}">
     <channel>
         <title>{{ .Site.Title }} {{ .Site.Params.Event }}s</title>
         <link>{{ .Permalink }}</link>
@@ -16,18 +19,18 @@
             <pubDate>{{ .PublishDate.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
             <guid>{{ .Permalink }}</guid>
             <description>{{ .Title }}, {{ partial "summary" . }}</description>
+            <content type="html">{{ printf `<![CDATA[%s]]>` .Content | safeHTML }}</content>
             {{- $location := .Site.GetPage (printf "/locations/%s" .Params.Location) }}
-            <location>{{ printf "%s (%s)" $location.Title $location.Params.District }}</location>
-            <locationLatitude>{{ $location.Params.Latitude }}</locationLatitude>
-            <locationLongtitude>{{ $location.Params.Longitude }}</locationLongtitude>
+            <location:name>{{ printf "%s (%s)" $location.Title $location.Params.District }}</location:name>
+            <location:latitude>{{ $location.Params.Latitude }}</location:latitude>
+            <location:longtitude>{{ $location.Params.Longitude }}</location:longtitude>
             {{- if isset .Site.Params "umap" }}
-            <locationUmapLink>{{ printf "%s?feature=%s (%s)" .Site.Params.Umap .Title $location.Params.District | safeURL }}</locationUmapLink>
+            <location:umap>{{ printf "%s?feature=%s (%s)" .Site.Params.Umap .Title $location.Params.District | safeURL }}</location:umap>
             {{- end }}
             {{- $address := printf "%s, %s %s" $location.Params.Street $location.Params.Zipcode $location.Params.City}}
-            <locationAddress>{{ $address }}</locationAddress>
-            <date>{{ time.Format "2006-01-02" .Date }}</date>
-            <time>{{ .Params.Starttime }}{{ with .Params.Endtime }}-{{ . }}{{ end }}</time>
-            <content type="html">{{ printf `<![CDATA[%s]]>` .Content | safeHTML }}</content>
+            <location:address>{{ $address }}</location:address>
+            <event:date>{{ time.Format "2006-01-02" .Date }}</event:date>
+            <event:time>{{ .Params.Starttime }}{{ with .Params.Endtime }}-{{ . }}{{ end }}</event:time>
         </item>
         {{- end }}
     </channel>

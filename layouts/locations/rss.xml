@@ -1,4 +1,6 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0"
+    xmlns:atom="http://www.w3.org/2005/Atom"
+    xmlns:location="{{ .Site.BaseURL }}">
     <channel>
         <title>{{ .Site.Title }} {{ .Site.Params.Location }}s</title>
         <link>{{ .Permalink }}</link>
@@ -17,14 +19,14 @@
             <guid>{{ .Permalink }}</guid>
             {{- $address := printf "%s, %s %s" .Params.Street .Params.Zipcode .Params.City}}
             <description>{{ printf "%s (%s), %s" .Title .Params.District $address }}</description>
-            <district>{{ .Params.District }}</district>
-            <address>{{ $address }}</address>
-            <latitude>{{ .Params.Latitude }}</latitude>
-            <longtitude>{{ .Params.Longitude }}</longtitude>
-            {{- if isset .Site.Params "umap" }}
-            <umapLink>{{ printf "%s?feature=%s (%s)" .Site.Params.Umap .Title .Params.District | safeURL }}</umapLink>
-            {{- end }}
             <content type="html">{{ printf `<![CDATA[%s]]>` .Content | safeHTML }}</content>
+            <location:district>{{ .Params.District }}</location:district>
+            <location:address>{{ $address }}</location:address>
+            <location:latitude>{{ .Params.Latitude }}</location:latitude>
+            <location:longtitude>{{ .Params.Longitude }}</location:longtitude>
+            {{- if isset .Site.Params "umap" }}
+            <location:umap>{{ printf "%s?feature=%s (%s)" .Site.Params.Umap .Title .Params.District | safeURL }}</location:umap>
+            {{- end }}
         </item>
         {{- end }}
     </channel>
