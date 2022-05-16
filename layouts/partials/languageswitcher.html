@@ -1,20 +1,22 @@
 <div id="language-switcher">
-    <a href="
-    {{- range $index, $translation := .AllTranslations -}}
-        {{- if ne $translation.Site.Language $.Site.Language -}}
-            {{- $translation.RelPermalink -}}
+{{- if gt (len .AllTranslations) 1 -}}
+    {{- $active := "" -}}
+    {{- $next := "" -}}
+    {{- $all := slice -}}
+    {{- range .AllTranslations -}}
+        {{- $all = $all | append .Site.Language -}}
+        {{- if eq .Site.Language $.Site.Language -}}
+            {{- $active = . -}}
+        {{- else if and $active (not $next) -}}
+            {{- $next = . -}}
         {{- end -}}
     {{- end -}}
-    ">
-        {{- range $index, $translation := .AllTranslations -}}
-            {{- if eq $translation.Site.Language $.Site.Language -}}
-                <span class="active">{{- $translation.Site.Language -}}</span>
-            {{- else -}}
-                {{- $translation.Site.Language -}}
-            {{- end -}}
-            {{- if ne (add $index 1) (len .AllTranslations) }}
-            ⇄
-            {{ end -}}
-        {{- end -}}
-    </a>
+    {{- if not $next -}}
+        {{- $next = index .AllTranslations 0 -}}
+    {{- end -}}
+    {{- $all = replace (delimit $all " ⇄ ") $active.Site.Language (printf "<span class=\"active\">%s</span>" $active.Site.Language) | safeHTML}}
+    <a href="{{ $next.RelPermalink }}">{{ $all }}</a>
+{{- else }}
+    {{ .Site.Language }} 
+{{- end -}}
 </div>
