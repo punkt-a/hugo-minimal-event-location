@@ -1,11 +1,11 @@
-<div class="locations-container">
+<div class="photo-grid">
     {{ range .Paginator.Pages.ByTitle }} 
     <a href="{{ .RelPermalink }}">
-        <figure class="locations-item">
+        <figure class="photo-grid-cell">
             {{ partial "locationimg" . }}
             <figcaption>
-                    <h4 class="locations-district">{{ .Params.District }}</h4>
-                    <h3 class="locations-name">{{ .Title }}</h3>
+                    <h4 class="caption-location-district">{{ .Params.District }}</h4>
+                    <h3 class="caption-location-name">{{ .Title }}</h3>
             </figcaption>
         </figure>
         {{ end }}   

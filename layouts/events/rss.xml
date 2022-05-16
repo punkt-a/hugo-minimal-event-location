@@ -2,22 +2,33 @@
     <channel>
         <title>{{ .Site.Title }} {{ .Site.Params.Event }}s</title>
         <link>{{ .Permalink }}</link>
-        <description>Feed of all {{ .Site.Title }} {{ .Site.Params.Event }}s</description>
+        <description>Feed of all upcoming {{ .Site.Title }} {{ .Site.Params.Event }}s</description>
         <generator>Hugo -- gohugo.io</generator>
-        {{ with .Site.LanguageCode }}<language>{{ . }}</language>{{ end }}
-        {{ if not .Date.IsZero }}<lastBuildDate>{{ .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</lastBuildDate>{{ end }}
-        {{ with .OutputFormats.Get "RSS" -}}
-            {{ printf "<atom:link href=%q rel=\"self\" type=%q />" .Permalink .MediaType | safeHTML }}
-        {{ end -}}
-        {{ range .Pages.ByDate.Reverse }}
+        <language>{{ .Site.LanguageCode }}</language>
+        <lastBuildDate>{{ time.Format "Mon, 02 Jan 2006 15:04:05 -0700" now | safeHTML }}</lastBuildDate>
+        {{- with .OutputFormats.Get "RSS" }}
+        {{ printf "<atom:link href=%q rel=\"self\" type=%q />" .Permalink .MediaType | safeHTML }}
+        {{- end -}}
+        {{- range .Pages.ByPublishDate.Reverse }}
         <item>
             <title>{{ .Title }}</title>
             <link>{{ .Permalink }}</link>
             <pubDate>{{ .PublishDate.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
             <guid>{{ .Permalink }}</guid>
-            <description>{{ .Title }} {{ i18n "on_str" }} {{ time.Format "Monday, 02.01.2006" .Date }}, {{ .Params.Starttime }}{{ if .Params.Endtime }}-{{ .Params.Endtime }}{{ end }} {{ i18n "oclock" }}</description>
+            <description>{{ .Title }}, {{ partial "summary" . }}</description>
+            {{- $location := .Site.GetPage (printf "/locations/%s" .Params.Location) }}
+            <location>{{ printf "%s (%s)" $location.Title $location.Params.District }}</location>
+            <locationLatitude>{{ $location.Params.Latitude }}</locationLatitude>
+            <locationLongtitude>{{ $location.Params.Longitude }}</locationLongtitude>
+            {{- if isset .Site.Params "umap" }}
+            <locationUmapLink>{{ printf "%s?feature=%s (%s)" .Site.Params.Umap .Title $location.Params.District | safeURL }}</locationUmapLink>
+            {{- end }}
+            {{- $address := printf "%s, %s %s" $location.Params.Street $location.Params.Zipcode $location.Params.City}}
+            <locationAddress>{{ $address }}</locationAddress>
+            <date>{{ time.Format "2006-01-02" .Date }}</date>
+            <time>{{ .Params.Starttime }}{{ with .Params.Endtime }}-{{ . }}{{ end }}</time>
             <content type="html">{{ printf `<![CDATA[%s]]>` .Content | safeHTML }}</content>
         </item>
-        {{ end }}
+        {{- end }}
     </channel>
 </rss>

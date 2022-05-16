@@ -1,5 +1,10 @@
 {{ define "main" }}
+<div id="locations-title">
 <h1>{{ partial "title" . }}</h1>
+{{- if isset .Site.Params "umap" -}}
+<a id="locations-map-link" href="{{ .Site.Params.umap }}">{{ i18n "show_map" }}</a>
+{{- end }}
+</div>
 {{ partial "locationlist" . }}
 <div class="tags">
     {{ range $count, $value := .Site.Taxonomies.locationtags.ByCount }}

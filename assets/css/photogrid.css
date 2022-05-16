@@ -1,0 +1,62 @@
+@media (min-width: 732px) {
+    div.photo-grid {
+        grid-template-columns: 0.5fr 0.5fr;
+    }
+}
+@media (max-width: 731px) {
+    div.photo-grid {
+        grid-template-columns: 1fr;
+    }
+}
+div.photo-grid {
+    display: grid;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+div.photo-grid a {
+    text-decoration: none;
+    color: var(--main-fg);
+}
+figure.photo-grid-cell {
+    margin: 0;
+    position: relative;
+    font-size: 0;
+}
+figure.photo-grid-cell:hover img {
+    opacity: 0.7;
+}
+figure.photo-grid-cell figcaption {
+    position: absolute;
+    bottom: 0.7rem;
+    left: 0.7rem;
+    text-shadow: 0px 0px 10px black, 0px 0px 10px black, 0px 0px 10px black, 0px 0px 10px black, 0px 0px 10px black;
+    max-width: 90%;
+}
+img.photo-grid-cell-image {
+    width: 100%;
+}
+h3.caption-location-name, h3.caption-event-name {
+    font-weight: 400;
+    font-size: 24pt;
+}
+h4.caption-location-district, h4.caption-event-datetime {
+    font-weight: 400;
+    font-size: 16pt;
+}
+h4.caption-event-datetime, h4.caption-event-location {
+    font-weight: 400;
+    font-size: 14pt;
+}
+
+div#photo-grids-container h2 {
+    margin: 1rem 0;
+}
+div#photo-grids-container hr {
+    margin-top: 2.5rem;
+    margin-bottom: 2rem;
+}
+div#photo-grids-container div#archive-link {
+    margin-top: 4rem;
+    width: 100%;
+    text-align: center;
+}

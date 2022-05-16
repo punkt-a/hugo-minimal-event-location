@@ -20,6 +20,9 @@ div#logo {
 a#logo-link:hover {
     text-decoration: none;
 }
+div#header a:hover {
+    color: var(--main-fg);
+}
 
 
 .nav-link {

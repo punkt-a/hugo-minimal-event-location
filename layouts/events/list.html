@@ -15,7 +15,7 @@
 {{ $allevents := slice $todayevents $futureevents $pastevents }}
 
 <h1>{{ partial "title" . }}</h1>
-<div id="events-container">
+<div id="photo-grids-container">
     {{ range $index, $events := $allevents }}
         {{ $key := "upcoming" }}
         {{ $dateformat := "Monday, 02.01." }}
@@ -29,7 +29,7 @@
         <hr>
         {{ end }}
         <h2>{{ i18n $key }}</h2>
-        <div class="locations-container {{ $key }}">
+        <div class="photo-grid {{ $key }}">
             {{ if eq (len $events) 0 }}
                 {{ i18n "no_entries" }}
             {{ end }}
@@ -39,21 +39,23 @@
                 {{ if .Params.Endtime }}
                     {{ $time = printf "%s-%s" $time .Params.Endtime }}
                 {{ end }}
-                <figure class="locations-item">
-                    {{ $location := .Site.GetPage (printf "/locations/%s" .Params.Location) }}
-                    {{ partial "locationimg" $location }}
-                    <figcaption>
-                        <a href="{{ .RelPermalink }}">
-                            <h4 class="locations-district">{{ $location.Title }}</h4>
-                            <h4 class="locations-district">{{ $date }}, {{ $time }}</h4>
-                            <h3 class="locations-name">{{ .Title }}</h3>
-                        </a>
-                    </figcaption>
-                </figure>
+                <a href="{{ .RelPermalink }}">
+                    <figure class="photo-grid-cell">
+                        {{ $location := .Site.GetPage (printf "/locations/%s" .Params.Location) }}
+                        {{ partial "locationimg" $location }}
+                        <figcaption>
+                                <h4 class="caption-event-location">{{ $location.Title }}</h4>
+                                <h4 class="caption-event-datetime">{{ $date }}, {{ $time }}</h4>
+                                <h3 class="caption-event-name">{{ .Title }}</h3>
+                        </figcaption>
+                    </figure>
+                </a>
             {{ end }}   
         </div>
     {{ end }}
-    <a class="archive-link" href="/categories/event">{{ i18n "show_archive" }}</a>
+    <div id="archive-link">
+        <a href="/categories/event">{{ i18n "show_archive" }}</a>
+    </div>
 </div>
 
 {{ end }}

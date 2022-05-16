@@ -1,27 +1,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>{{ if eq  .Title  .Site.Title }}{{ .Site.Title }}{{ else }}{{ with .Title }}{{.}} on {{ end }}{{ .Site.Title }}{{ end }}</title>
+        <title>{{ .Site.Title }} {{ .Site.Params.Location }}s</title>
         <link>{{ .Permalink }}</link>
-        <description>Recent content {{ if ne  .Title  .Site.Title }}{{ with .Title }}in {{.}} {{ end }}{{ end }}on {{ .Site.Title }}</description>
-        <generator>Hugo -- gohugo.io</generator>{{ with .Site.LanguageCode }}
-        <language>{{.}}</language>{{end}}{{ with .Site.Author.email }}
-        <managingEditor>{{.}}{{ with $.Site.Author.name }} ({{.}}){{end}}</managingEditor>{{end}}{{ with .Site.Author.email }}
-        <webMaster>{{.}}{{ with $.Site.Author.name }} ({{.}}){{end}}</webMaster>{{end}}{{ with .Site.Copyright }}
-        <copyright>{{.}}</copyright>{{end}}{{ if not .Date.IsZero }}
-        <lastBuildDate>{{ .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</lastBuildDate>{{ end }}
-        {{ with .OutputFormats.Get "RSS" -}}
-            {{ printf "<atom:link href=%q rel=\"self\" type=%q />" .Permalink .MediaType | safeHTML }}
-        {{ end -}}
-        {{ range .Pages }}
+        <description>Feed of all {{ .Site.Title }} {{ .Site.Params.Location }}s</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>{{ .Site.LanguageCode }}</language>
+        <lastBuildDate>{{ time.Format "Mon, 02 Jan 2006 15:04:05 -0700" now | safeHTML }}</lastBuildDate>
+        {{- with .OutputFormats.Get "RSS" }}
+        {{ printf "<atom:link href=%q rel=\"self\" type=%q />" .Permalink .MediaType | safeHTML }}
+        {{- end -}}
+        {{- range .Pages.ByPublishDate.Reverse }}
         <item>
             <title>{{ .Title }}</title>
             <link>{{ .Permalink }}</link>
-            <pubDate>{{ .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
-            {{ with .Site.Author.email }}<author>{{.}}{{ with $.Site.Author.name }} ({{.}}){{end}}</author>{{end}}
+            <pubDate>{{ .PublishDate.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
             <guid>{{ .Permalink }}</guid>
-            <description>{{ .Summary | html }}</description>
+            {{- $address := printf "%s, %s %s" .Params.Street .Params.Zipcode .Params.City}}
+            <description>{{ printf "%s (%s), %s" .Title .Params.District $address }}</description>
+            <district>{{ .Params.District }}</district>
+            <address>{{ $address }}</address>
+            <latitude>{{ .Params.Latitude }}</latitude>
+            <longtitude>{{ .Params.Longitude }}</longtitude>
+            {{- if isset .Site.Params "umap" }}
+            <umapLink>{{ printf "%s?feature=%s (%s)" .Site.Params.Umap .Title .Params.District | safeURL }}</umapLink>
+            {{- end }}
             <content type="html">{{ printf `<![CDATA[%s]]>` .Content | safeHTML }}</content>
         </item>
-        {{ end }}
+        {{- end }}
     </channel>
 </rss>

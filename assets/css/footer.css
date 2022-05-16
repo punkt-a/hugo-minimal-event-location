@@ -8,7 +8,6 @@ div#footer {
     max-height: 1.5rem;
 }
 #footer a {
-    text-decoration: none;
     display: flex;
     gap: 0.5rem;
     justify-content: center;

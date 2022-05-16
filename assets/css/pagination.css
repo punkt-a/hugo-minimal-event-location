@@ -1,13 +1,18 @@
 div.pagination {
     margin-top: 3rem;
     display: flex;
-    gap: 3rem;
+    row-gap: 0.3rem;
+    column-gap: 3rem;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 div.pagination div.larger {
     font-size: 14pt;
+}
+div.pagination a {
+    text-decoration: none !important;
 }
 
 div.pagination span.page-number.current {
@@ -25,4 +30,7 @@ div.page-prev {
 div.page-next {
     flex: 1;
     text-align: left;
+}
+a.page-prev, a.page-next {
+    white-space: nowrap;
 }

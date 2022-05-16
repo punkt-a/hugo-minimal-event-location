@@ -10,8 +10,9 @@
     {{- $title := partial "title" . -}}
     {{- if not .IsHome -}}
     {{- $title = printf "%s | %s" $title .Site.Title -}}
-    {{- end -}}
+    {{- end }}
     <title>{{ $title }}</title>
+    <meta name="description" content="{{ partial "summary" . }}">
     <meta property="og:url" content="{{ .Site.BaseURL }}">
     <meta property="og:type" content="website">
     <meta property="og:title" content="{{ (partial "title" .) }}">

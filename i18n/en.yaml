@@ -30,3 +30,11 @@ categories:
   other: Categories
 category:
   other: Category
+show_map:
+  other: Show all on map
+show_on_map:
+  other: Show on {{ . }} map
+show_in_maps_app:
+  other: Show in maps app
+full_address:
+  other: Address

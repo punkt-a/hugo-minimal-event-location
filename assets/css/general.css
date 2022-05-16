@@ -1,6 +1,7 @@
 :root {
     --main-bg: black;
     --main-fg: #a9a9b3;
+    --darker-fg: #787887
 }
 
 body {
@@ -17,8 +18,12 @@ a {
     text-decoration: none;
     color: var(--main-fg);
 }
+div#content a {
+    text-decoration: underline;
+}
 a:hover {
     text-decoration: underline;
+    color: var(--darker-fg);
 }
 h1 {
     margin: 0;
@@ -76,4 +81,5 @@ div.tags {
     display: flex;
     gap: 0.7rem;
     justify-content: center;
+    flex-wrap: wrap;
 }
