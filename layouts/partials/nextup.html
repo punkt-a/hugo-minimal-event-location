@@ -13,9 +13,9 @@
         <p>
             {{ range $nextups }}
             {{ if gt (sub now.Unix .Date.Unix) 1 }}
-            <a href="{{ .RelPermalink }}" class="today">{{ i18n "today" }}, {{ .Params.Starttime }}{{ if isset .Params "endtime"}}-{{ .Params.Endtime }}{{ end }} – {{ .Title }}</a>
+            <a href="{{ .RelPermalink }}" class="today">{{ i18n "today" }}, {{ .Params.Starttime }} – {{ .Title }}</a>
             {{ else }}
-            <a href="{{ .RelPermalink }}">{{ time.Format "Monday, 02.01." .Date }}, {{ .Params.Starttime }}{{ if isset .Params "endtime"}}-{{ .Params.Endtime }}{{ end }} – {{ .Title }}</a>
+            <a href="{{ .RelPermalink }}">{{ time.Format "Monday, 02.01." .Date }}, {{ .Params.Starttime }} – {{ .Title }}</a>
             {{ end }}
             <br>
             {{ end }}
