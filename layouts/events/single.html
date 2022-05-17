@@ -1,7 +1,10 @@
 {{ define "main" }}
 
 {{- $location := .Site.GetPage (printf "/locations/%s" .Params.Location) -}}
-{{- $geourl := printf "geo:%f,%f?q=%f,%f(%s (%s))" $location.Params.Latitude $location.Params.Longitude $location.Params.Latitude $location.Params.Longitude $location.Title $location.Params.District | safeURL -}}
+{{- $mapurl := printf "https://www.openstreetmap.org/?mlat=%f&mlon=%f&zoom=12" $location.Params.Latitude $location.Params.Longitude | safeURL -}}
+{{- if isset .Site.Params "umap" -}}
+{{- $mapurl = (printf "%s?feature=%s (%s)" .Site.Params.umap $location.Title $location.Params.District | safeURL) -}}
+{{- end -}}
 
 <h1>{{ .Title }}</h1>
 <p id=event-meta>
@@ -17,7 +20,7 @@
         <a href="{{ $location.RelPermalink }}">{{ $location.Title }} ({{ $location.Params.District }})</a>
     </h3>
     <br>
-    <b>{{ i18n "full_address" }}:</b><br><a href="{{ $geourl }}">{{ $location.Params.Street }}<br>{{ $location.Params.Zipcode }} {{ $location.Params.City }}</a>
+    <b>{{ i18n "full_address" }}:</b><br><a href="{{ $mapurl }}">{{ $location.Params.Street }}<br>{{ $location.Params.Zipcode }} {{ $location.Params.City }}</a>
     
     {{ partial "locationsingleimages" $location }}
 
