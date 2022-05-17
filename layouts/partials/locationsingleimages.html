@@ -1,0 +1,18 @@
+{{ $folder := printf "content%simages" (.RelPermalink | replaceRE "^/[a-z][a-z]/" "/") }}
+{{ if fileExists $folder }}
+<div id="location-images">
+    {{ $images := readDir $folder}}
+    {{ range $index, $image := $images }} 
+    {{ $imageurl := printf "%simages/%s" $.RelPermalink $image.Name | replaceRE "^/[a-z][a-z]/" "/" }}
+    <a href="{{ $imageurl }}" class="location-image
+    {{- if and (not (modBool (len $images) 2)) (eq $index (sub (len $images) 1)) }}
+    last-image-center
+    {{- end -}}
+    ">
+        <img src="{{ $imageurl }}" alt="{{ i18n "photo_of" }} {{ $.Site.Params.Location }} {{ $.Title }}"/>
+    </a>
+    {{ end }}
+</div>
+{{ else }}
+<p>{{ i18n "no_photo" }}!</p>
+{{ end }}

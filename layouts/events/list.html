@@ -47,7 +47,7 @@
                         {{ $location := .Site.GetPage (printf "/locations/%s" .Params.Location) }}
                         {{ partial "locationimg" $location }}
                         <figcaption>
-                                <h4 class="caption-event-location">{{ $location.Title }}</h4>
+                                <h4 class="caption-event-location">{{ $location.Title }} ({{ $location.Params.District }})</h4>
                                 <h4 class="caption-event-datetime">{{ $date }}, {{ $time }}</h4>
                                 <h3 class="caption-event-name">{{ .Title }}</h3>
                         </figcaption>

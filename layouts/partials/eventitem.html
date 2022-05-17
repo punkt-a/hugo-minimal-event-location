@@ -1,8 +1,10 @@
-<div class="event-flex-item">
-    <h4><a href="{{ .RelPermalink }}">{{ .Title }}</a></h4>
-    {{ time.Format "Monday, 02.01." .Date }}<br>
-    {{ .Params.Starttime }}
-    {{- if ne .Params.Endtime "" }}-{{ .Params.Endtime }}{{ end }}<br>
-    {{ $location := .Site.GetPage (printf "/locations/%s" .Params.Location)  }}
-    <a href="{{ $location.RelPermalink }}">{{ $location.Title }}</a>
-</div>
+<a href="{{ .RelPermalink }}">
+    <div class="event-flex-item">
+        <h4>{{ .Title }}</h4>
+        {{ time.Format "Monday, 02.01." .Date }}<br>
+        {{ .Params.Starttime }}
+        {{- if ne .Params.Endtime "" }}-{{ .Params.Endtime }}{{ end }}<br>
+        {{ $location := .Site.GetPage (printf "/locations/%s" .Params.Location)  }}
+        {{ $location.Title }}
+    </div>
+</a>

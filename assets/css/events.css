@@ -9,8 +9,52 @@ div.event-flex-container {
     margin-left: 1rem;
 }
 div.event-flex-item {
-    border: 0.2rem;
-    border-color: var(--main-fg);
+    border: 1px;
     border-style: solid;
+    border-radius: 0.6rem;
     padding: 1rem;
 }
+div#event-archive-container a {
+    text-decoration: none !important;
+    color: var(--main-fg);
+}
+div.event-flex-item:hover {
+    background-color: var(--lighter-bg);
+}
+
+p#event-meta {
+    font-size: 14pt;
+}
+
+div#event-location-preview {
+    margin: 0 auto;
+    margin-top: 2rem;
+    max-width: 75%;
+    border: solid;
+    border-width: 1px;
+    border-radius: 1rem;
+    padding: 1.5rem;
+}
+div#event-location-preview h3 {
+    font-weight: normal;
+}
+div#event-location-preview div#location-images {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    flex-shrink: 1;
+    justify-content: center;
+}
+
+@media (min-width: 732px) {
+    div#event-location-preview a.location-image {
+        width: 22%;
+    }
+}
+@media (max-width: 731px) {
+    div#event-location-preview a.location-image {
+        width: 45%;
+    }
+}
+

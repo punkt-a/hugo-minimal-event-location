@@ -2,7 +2,7 @@
     --main-bg: black;
     --main-fg: #a9a9b3;
     --darker-fg: #787887;
-    --lighter-bg: #858593;
+    --lighter-bg: #18181b;
 }
 
 body {
@@ -87,6 +87,7 @@ div.tags {
     gap: 0.7rem;
     justify-content: center;
     flex-wrap: wrap;
+    font-size: 14pt;
 }
 div#special-title {
     display: flex;

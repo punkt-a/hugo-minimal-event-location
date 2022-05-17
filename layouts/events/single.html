@@ -1,16 +1,28 @@
 {{ define "main" }}
 
+{{- $location := .Site.GetPage (printf "/locations/%s" .Params.Location) -}}
+{{- $geourl := printf "geo:%f,%f?q=%f,%f(%s (%s))" $location.Params.Latitude $location.Params.Longitude $location.Params.Latitude $location.Params.Longitude $location.Title $location.Params.District | safeURL -}}
+
 <h1>{{ .Title }}</h1>
 <p id=event-meta>
-    {{ $location := .Site.GetPage (printf "/locations/%s" .Params.Location)  }}
-    <b>{{ .Site.Params.Location }}:</b> <a href="{{ $location.RelPermalink }}">{{ $location.Title }}</a><br>
     <b>{{ i18n "date" }}:</b> {{ time.Format "Monday, 02.01.2006" .Date }}<br>
-    <b>{{ i18n "time" }}:</b> {{ .Params.Starttime }}
-    {{- if ne .Params.Endtime "" }}-{{ .Params.Endtime }}{{ end }}
+    <b>{{ i18n "time" }}:</b> {{ .Params.Starttime }}{{- if ne .Params.Endtime "" }}-{{ .Params.Endtime }}{{ end }}
 </p>
 <p id=event-description>
 {{ .Content }}
 </p>
+
+<div id="event-location-preview">
+    <h3><b>{{ .Site.Params.Location }}:</b>
+        <a href="{{ $location.RelPermalink }}">{{ $location.Title }} ({{ $location.Params.District }})</a>
+    </h3>
+    <br>
+    <b>{{ i18n "full_address" }}:</b><br><a href="{{ $geourl }}">{{ $location.Params.Street }}<br>{{ $location.Params.Zipcode }} {{ $location.Params.City }}</a>
+    
+    {{ partial "locationsingleimages" $location }}
+
+</div>
+
 {{ partial "paginationsingle" . }}
 
 {{ end }}

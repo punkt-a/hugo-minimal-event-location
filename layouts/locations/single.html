@@ -1,43 +1,7 @@
 {{ define "main" }}
 
-{{- $geourl := printf "geo:%f,%f?q=%f,%f(%s (%s))" .Params.Latitude .Params.Longitude .Params.Latitude .Params.Longitude .Title .Params.District | safeURL -}}
-{{- $mapurl := printf "https://www.openstreetmap.org/?mlat=%f&mlon=%f&zoom=12" .Params.Latitude .Params.Longitude | safeURL -}}
-{{- $mapname := "OpenStreetMap" -}}
-{{- if isset .Site.Params "umap" -}}
-{{- $mapurl = (printf "%s?feature=%s (%s)" .Site.Params.umap .Title .Params.District | safeURL) -}}
-{{- $mapname = .Site.Params.Location -}}
-{{- end }}
 <h1>{{ .Title }} ({{ .Params.District }})</h1>
-<div id="location-preamble">
-    <p>
-        <b>{{ i18n "full_address" }}:</b><br>
-        {{ .Params.Street }}<br>
-        {{ .Params.Zipcode }} {{ .Params.City }}<br><br>
-        <a href="{{ $mapurl }}" class="location" target="_blank" rel="noopener">{{ i18n "show_on_map" $mapname }}</a><br><br>
-        <a href="{{ $geourl }}" class="location" target="_blank" rel="noopener">{{ i18n "show_in_maps_app" }}</a>
-    </p>
-</div>
-<div id=location-description>
-{{ .Content }}
-</div>
-{{ $folder := printf "content%simages" (.RelPermalink | replaceRE "^/[a-z][a-z]/" "/") }}
-{{ if fileExists $folder }}
-<div id="location-images">
-    {{ $images := readDir $folder}}
-    {{ range $index, $image := $images }} 
-    {{ $imageurl := printf "%simages/%s" $.RelPermalink $image.Name | replaceRE "^/[a-z][a-z]/" "/" }}
-    <a href="{{ $imageurl }}" class="location-image
-    {{- if and (not (modBool (len $images) 2)) (eq $index (sub (len $images) 1)) }}
-    last-image-center
-    {{- end -}}
-    ">
-        <img src="{{ $imageurl }}" alt="{{ i18n "photo_of" }} {{ $.Site.Params.Location }} {{ $.Title }}"/>
-    </a>
-    {{ end }}
-</div>
-{{ else }}
-<p>{{ i18n "no_photo" }}!</p>
-{{ end }}
+{{ partial "locationdata" . }}
 <div class="tags">
     {{ range .Params.Locationtags }}
     <a href="/locationtags/{{ . | safeURL }}">#{{ . }}</a>

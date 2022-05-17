@@ -22,3 +22,6 @@ div#location-images {
 #location-images img {
     width: 100%;
 }
+div#location-preamble {
+    font-size: 14pt;
+}
