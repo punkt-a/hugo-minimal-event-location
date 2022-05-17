@@ -13,7 +13,7 @@ summary {
 }
 @keyframes target-fade {
     from {
-        background-color: var(--lighter-bg);
+        background-color: var(--target-bg);
     }
     to {
         background-color: var(--main-bg);
