@@ -1,5 +1,5 @@
 <div id="{{ .Get 0 | urlize }}" class="anchor"></div>
 <details>
     <summary><span class="faq-question">{{ .Get 0 }}<span></summary>
-    <div class="faq-answer">{{ .Inner | markdownify }}</div>
+    <div class="faq-answer">{{ .Inner }}</div>
 </details>

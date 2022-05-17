@@ -5,9 +5,9 @@
 {{ end }}
     <div id="logo">
         <img src="{{ .Site.Params.Logo.Path }}" alt="{{ .Site.Title }} Logo"/>
-        <p>
-            {{ .Site.Params.Logo.Line1 }}<br>
-            {{ .Site.Params.Logo.Line2 }}
-        </p>
+        <div id="logo-text">
+            <div id="logo-line1">{{ .Site.Params.Logo.Line1 }}</div>
+            <div id="logo-line2">{{ .Site.Params.Logo.Line2 }}</div>
+        </div>
     </div>
 </a>

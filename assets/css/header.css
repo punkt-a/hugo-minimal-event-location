@@ -11,6 +11,10 @@ div#logo {
     align-items: center;
     margin-right: 3rem;
 }
+div#logo-line1 {
+    font-size: 14pt;
+    font-weight: 600;
+}
 
 #logo img {
     max-width: 3rem;
