@@ -1,6 +1,6 @@
 <rss version="2.0"
     xmlns:atom="http://www.w3.org/2005/Atom"
-    xmlns:location="{{ .Site.BaseURL }}">
+    xmlns:location="{{ .Site.BaseURL }}xmlns-location">
     <channel>
         <title>{{ .Site.Title }} {{ .Site.Params.Location }}s</title>
         <link>{{ .Permalink }}</link>
