@@ -1,7 +1,8 @@
 :root {
     --main-bg: black;
     --main-fg: #a9a9b3;
-    --darker-fg: #787887
+    --darker-fg: #787887;
+    --lighter-bg: #858593;
 }
 
 body {
@@ -29,7 +30,7 @@ h1 {
     margin: 0;
     margin-bottom: 1rem;
 }
-div#index h1 {
+div#home h1 {
     font-size: 40pt;
 }
 h2, h3, h4, h5 {
@@ -65,12 +66,13 @@ div#content {
     font-size: 16pt;
     font-weight: 400;
 }
-#index {
+#home {
     margin-top: 3rem;
     text-align: center;
 }
 #nextup {
-    padding-top: 3rem;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
 }
 #nextup a.today {
     font-weight: 600;

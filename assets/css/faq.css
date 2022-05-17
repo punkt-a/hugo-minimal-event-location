@@ -11,3 +11,20 @@ summary {
     cursor: pointer;
     list-style-position: outside;
 }
+@keyframes target-fade {
+    from {
+        background-color: var(--lighter-bg);
+    }
+    to {
+        background-color: var(--main-bg);
+    }
+}
+div.anchor:target + details > summary > span.faq-question {
+    animation-name: target-fade;
+    animation-duration: 1s;
+     animation-timing-function: ease-in;
+}
+div.anchor {
+    position: absolute;
+    transform: translateY(-50vh);
+}
