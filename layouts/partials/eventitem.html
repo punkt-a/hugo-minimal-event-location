@@ -3,7 +3,7 @@
         <h4>{{ .Title }}</h4>
         {{ time.Format "Monday, 02.01." .Date }}<br>
         {{ .Params.Starttime }}
-        {{- if ne .Params.Endtime "" }}-{{ .Params.Endtime }}{{ end }}<br>
+        {{- with .Params.Endtime }}-{{ . }}{{ end }}<br>
         {{ $location := .Site.GetPage (printf "/locations/%s" .Params.Location)  }}
         {{ $location.Title }}
     </div>

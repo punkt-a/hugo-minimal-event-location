@@ -9,7 +9,7 @@
 <h1>{{ .Title }}</h1>
 <p id=event-meta>
     <b>{{ i18n "date" }}:</b> {{ time.Format "Monday, 02.01.2006" .Date }}<br>
-    <b>{{ i18n "time" }}:</b> {{ .Params.Starttime }}{{- if ne .Params.Endtime "" }}-{{ .Params.Endtime }}{{ end }}
+    <b>{{ i18n "time" }}:</b> {{ .Params.Starttime }}{{- with .Params.Endtime }}-{{ . }}{{ end }}
 </p>
 <p id=event-description>
 {{ .Content }}
