@@ -5,7 +5,7 @@
     {{ end }}
 {{ end }}
 {{ if gt (len $nextups) 0 }}
-<div id="nextup">
+<div data-nosnippet id="nextup">
     <h3>{{ i18n "nextup" }} {{ $.Site.Params.Event }}s</h3>
     <p>
         {{ range $nextups }}
