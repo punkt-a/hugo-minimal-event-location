@@ -1,4 +1,9 @@
 <div id="header">
+    {{- with .Site.Params.Announcement }}
+    <div data-nosnippet id="announcement">
+        {{ . }}
+    </div>
+    {{- end }}
     <div id="top-bar">
         {{- partial "logo.html" . -}}
         <div class="menu desktop-only">

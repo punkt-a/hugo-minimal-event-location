@@ -1,15 +1,29 @@
 {{- $pages := where site.RegularPages "Section" .Section -}}
 {{- $next := $pages.ByTitle.Reverse.Next . -}}
 {{- $prev := $pages.ByTitle.Reverse.Prev . -}}
+{{- $nextname := "" -}}
+{{- if $next -}}
+{{- $nextname = $next.Title -}}
+{{- if eq $next.Type "events" -}}
+{{- $nextname = printf "%s, %s" $nextname (time.Format "02.01.2006" $next.Date) -}}
+{{- end -}}
+{{- end -}}
+{{- $prevname := "" -}}
+{{- if $prev -}}
+{{- $prevname = $prev.Title -}}
+{{- if and $prev (eq $prev.Type "events") -}}
+{{- $prevname = printf "%s, %s" $prevname (time.Format "02.01.2006" $prev.Date) -}}
+{{- end -}}
+{{- end -}}
 <div class="pagination">
     {{- if $prev }}
-    <a class="page-prev" href="{{ $prev.RelPermalink }}">< {{ $prev.Title }}</a>
+    <a class="page-prev" href="{{ $prev.RelPermalink }}">< {{ $prevname }}</a>
     {{- else }}
     <a class="page-prev"></a>
     {{- end }}
     <div class="page-numbers"></div>
     {{- if $next }}
-    <a class="page-next" href="{{ $next.RelPermalink }}">{{ $next.Title }} ></a>
+    <a class="page-next" href="{{ $next.RelPermalink }}">{{ $nextname }} ></a>
     {{- else }}
     <a class="page-next"></a>
     {{- end }}
