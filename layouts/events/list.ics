@@ -12,12 +12,12 @@ DESCRIPTION:{{ i18n "full_address" }}:\n
  {{ $location.Params.Zipcode}} {{ $location.Params.City}}\n
  {{ i18n "coordinates" }}: {{ $location.Params.Latitude }}, {{ $location.Params.Longitude }}\n
  {{ .Permalink }}
-DTSTAMP:{{ time.Format "20060102T150405" .PublishDate.UTC }}
+DTSTAMP:{{ time.Format "20060102T150405" .PublishDate.UTC }}Z
 {{- $start := replace (printf "%s" .Date) "00:00:00" (printf "%s:00" .Params.Starttime) | time }}
-DTSTART:{{ time.Format "20060102T150405" $start.UTC }}
+DTSTART:{{ time.Format "20060102T150405" $start.UTC }}Z
 {{- if isset .Params "endtime" -}}
 {{- $end := replace (printf "%s" .Date) "00:00:00" (printf "%s:00" .Params.Endtime) | time }}
-DTEND:{{ time.Format "20060102T150405" $end.UTC }}
+DTEND:{{ time.Format "20060102T150405" $end.UTC }}Z
 {{- else }}
 DURATION:PT2H
 {{- end }}
