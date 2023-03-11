@@ -34,6 +34,7 @@ figure.photo-grid-cell figcaption {
 }
 img.photo-grid-cell-image {
     width: 100%;
+    border-radius: 0.5rem;
 }
 h3.caption-location-name, h3.caption-event-name {
     font-weight: 400;
