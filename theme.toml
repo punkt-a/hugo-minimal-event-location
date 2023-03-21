@@ -1,5 +1,5 @@
 name = "Minimal Event Location"
-license = "CC0"
+license = "GNU General Public License v3.0"
 licenselink = "https://github.com/punkt-a/hugo-minimal-event-location/blob/main/LICENSE"
 description = "A quite minimal, responsive theme to manage events and locations."
 homepage = "https://github.com/punkt-a/hugo-minimal-event-location"
