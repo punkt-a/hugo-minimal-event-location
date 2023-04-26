@@ -6,7 +6,7 @@
     {{ if not (eq $image.Name "preview.jpg") }}
     {{ $imageurl := printf "%simages/%s" $.RelPermalink $image.Name | replaceRE "^/[a-z][a-z]/" "/" }}
     <a href="{{ $imageurl }}" class="location-image
-    {{- if and (not (modBool (len $images) 2)) (eq $index (sub (len $images) 1)) }}
+    {{- if and (not (modBool (sub (len $images) 1) 2)) (eq $index (sub (len $images) 2)) }}
     last-image-center
     {{- end -}}
     ">
