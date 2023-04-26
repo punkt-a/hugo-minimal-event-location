@@ -1,4 +1,4 @@
-{{- $imgpath := printf "%simages/photo_001.jpg" (.RelPermalink | replaceRE "^/[a-z][a-z]/" "/") -}}
+{{- $imgpath := printf "%simages/preview.jpg" (.RelPermalink | replaceRE "^/[a-z][a-z]/" "/") -}}
 {{ $imgpath }}
 {{ .RelPermalink }}
 {{- if not (fileExists $imgpath) -}}

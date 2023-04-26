@@ -19,10 +19,10 @@
     <meta property="og:description" content="{{ partial "summary" . }}">
     {{- $ogimage := "/images/og-preview.jpg" -}}
     {{- if and (eq .Type "locations") (eq .Kind "page") -}}
-    {{- $ogimage = printf "%simages/photo_001.jpg" (.RelPermalink | replaceRE "^/[a-z][a-z]/" "/") -}}
+    {{- $ogimage = printf "%simages/preview.jpg" (.RelPermalink | replaceRE "^/[a-z][a-z]/" "/") -}}
     {{- else if and (eq .Type "events") (eq .Kind "page") -}}
     {{- $location := .Site.GetPage (printf "/locations/%s" .Params.Location) -}}
-    {{- $ogimage = printf "%simages/photo_001.jpg" ($location.RelPermalink | replaceRE "^/[a-z][a-z]/" "/") -}}
+    {{- $ogimage = printf "%simages/preview.jpg" ($location.RelPermalink | replaceRE "^/[a-z][a-z]/" "/") -}}
     {{- end -}}
     {{- if or (fileExists $ogimage) (fileExists (printf "static%s" $ogimage)) }}
     <meta property="og:image" content="{{ $ogimage }}">
