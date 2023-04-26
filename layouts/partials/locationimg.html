@@ -4,4 +4,4 @@
 {{- if not (fileExists $imgpath) -}}
 {{- $imgpath = "/images/no-photo.jpg" -}}
 {{- end -}}
-<img src="{{ $imgpath }}" alt="{{ i18n "photo_of_location" }} {{ .Title }}" class="photo-grid-cell-image">
+<img src="{{ $imgpath }}" alt="{{ i18n "photo_of" }} {{ .Title }}" class="photo-grid-cell-image">

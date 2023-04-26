@@ -3,6 +3,7 @@
 <div id="location-images">
     {{ $images := readDir $folder}}
     {{ range $index, $image := $images }} 
+    {{ if not (eq $image.Name "preview.jpg") }}
     {{ $imageurl := printf "%simages/%s" $.RelPermalink $image.Name | replaceRE "^/[a-z][a-z]/" "/" }}
     <a href="{{ $imageurl }}" class="location-image
     {{- if and (not (modBool (len $images) 2)) (eq $index (sub (len $images) 1)) }}
@@ -11,6 +12,7 @@
     ">
         <img src="{{ $imageurl }}" alt="{{ i18n "photo_of" }} {{ $.Site.Params.Location }} {{ $.Title }}"/>
     </a>
+    {{ end }}
     {{ end }}
 </div>
 {{ else }}
