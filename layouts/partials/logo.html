@@ -1,4 +1,4 @@
-{{ if eq .Language .Sites.First.Language }}
+{{ if eq .Language .Sites.Default.Language }}
 <a href="/" id="logo-link">
 {{ else }}
 <a href="/{{ .Language }}" id="logo-link">
